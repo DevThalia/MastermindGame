@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind</title>
+</head>
+
+<body onload="init()">
+    <script>
+        const colorsArray = ['white', 'green', 'red', 'blue', 'pink', 'yellow', 'orange', 'cyan']
+        const MAX_ATTEMPS = 10;
+        const MAX_COMBINATION_COLORS = 4;
+        let masterArray = [];
+        let userArray = [];
+        let match = false;
+
+        function getRandomMaster() {
+            for (let i = 1; i <= MAX_COMBINATION_COLORS; i++) {
+                masterArray.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
+            }
+            console.log("ARRAY DE LA MASTER: " + masterArray)
+        }
+
+        function getRandomUser() {
+            for (let i = 1; i <= MAX_COMBINATION_COLORS; i++) {
+                userArray.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
+            }
+            console.log("ARRAY DEL USUARIO: " + userArray)
+        }
+
+        function compareTwoArrays() {
+            //console.log(masterArray);
+            for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
+                if (masterArray[i] == userArray[i]) {
+                    let coincidencia = masterArray[i]
+                    match = true
+                    console.log("Boolean -> " + match)
+                    console.log("Color que coincide -> " + coincidencia)
+                    console.log("Índex de coincidencia -> " + masterArray.indexOf(coincidencia))
+                } else {
+                    match = false
+                    console.log(match)
+                    console.log(masterArray[i])
+                }
+            }
+        }
+
+        function makeContainsNameColours(array) {
+            let containerDiv=document.createElement("div")
+            containerDiv.className="containsNameColours"
+            for (let i = 0; i < array.length; i++) {
+                let div = document.createElement("div");
+                div.className = "colorBox";
+                div.innerHTML = array[i];
+                containerDiv.appendChild(div);
+                containerDiv.style.display="flex"
+                div.style.backgroundColor="grey"
+                div.style.width="70px"
+                div.style.height="70px"
+            }
+            document.body.appendChild(containerDiv)
+        }
+
+
+
+
+        function init() {
+            getRandomMaster()
+            getRandomUser()
+            makeContainsNameColours(masterArray)
+            coincidencia = compareTwoArrays()
+        }
+    </script>
+</body>
+
+</html>
