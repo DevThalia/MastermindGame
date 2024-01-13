@@ -16,6 +16,7 @@
         let userArray = [];
         let match = false;
 
+        //function that make a random Array whit random colours
         function getRandomMaster() {
             for (let i = 1; i <= MAX_COMBINATION_COLORS; i++) {
                 masterArray.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
@@ -23,6 +24,7 @@
             console.log("ARRAY DE LA MASTER: " + masterArray)
         }
 
+        //function that simulate the user combination
         function getRandomUser() {
             for (let i = 1; i <= MAX_COMBINATION_COLORS; i++) {
                 userArray.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
@@ -30,8 +32,88 @@
             console.log("ARRAY DEL USUARIO: " + userArray)
         }
 
+        //function that displays the master array on the navegator screen
+        function makeMasterArray(masterArray) {
+            let containerDiv = document.createElement("div")
+            containerDiv.className = "containsMasterArray"
+            for (let i = 0; i < masterArray.length; i++) {
+                let div = document.createElement("div");
+                div.className = "masterBoxes";
+                div.innerHTML = masterArray[i];
+                containerDiv.appendChild(div);
+                containerDiv.style.display = "flex"
+                div.style.backgroundColor = "lightblue"
+                div.style.width = "70px"
+                div.style.height = "70px"
+            }
+            document.body.appendChild(containerDiv)
+        }
+
+        function makeUserArray(userArray) {
+            let contaninerUser = document.createElement("div")
+            contaninerUser.className = "containsUserArray"
+            for (let i = 0; i < userArray.length; i++) {
+                let div = document.createElement("div");
+                div.className = "userBoxes";
+                div.innerHTML = userArray[i];
+                contaninerUser.appendChild(div);
+                contaninerUser.style.display = "flex"
+                div.style.backgroundColor = "lightgreen"
+                div.style.width = "70px"
+                div.style.height = "70px"
+                //printDifferentColours(userArray)
+            }
+            document.body.appendChild(contaninerUser)
+        }
+
+        /*printDifferentColours(userArray) 
+            switch (userArray[i]) {
+                case "white":
+                    div.style.backgroundColor = "white";
+                    break;
+                case "green":
+                    div.style.backgroundColor = "green";
+                    break;
+                case "red":
+                    div.style.backgroundColor = "red";
+                    break;
+                case "blue":
+                    div.style.backgroundColor = "blue";
+                    break;
+                case "pink":
+                    div.style.backgroundColor = "pink";
+                    break;
+                case "yellow":
+                    div.style.backgroundColor = "yellow";
+                    break;
+                case "orange":
+                    div.style.backgroundColor = "orange";
+                    break;
+                case "cyan":
+                    div.style.backgroundColor = "cyan";
+                    break;
+            }*/
+
+        //function that displays the user array on the navegator screen
+        function makeColoursArray(colorsArray) {
+            let containerDiv = document.createElement("div");
+            containerDiv.className = "containsColoursArray";
+            containerDiv.style.display = "flex";
+
+            for (let i = 0; i < colorsArray.length; i++) {
+                let div = document.createElement("div");
+                div.className = "colorBottoms";
+                div.innerHTML = colorsArray[i];
+                div.style.width = "70px";
+                div.style.height = "70px";
+
+                containerDiv.appendChild(div);
+            }
+            document.body.appendChild(containerDiv);
+        }
+
+        //function that compare the masterArray and userArray. Also it print on console.log the results of the comparacion
         function compareTwoArrays() {
-            //console.log(masterArray);
             for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
                 if (masterArray[i] == userArray[i]) {
                     let coincidencia = masterArray[i]
@@ -47,29 +129,40 @@
             }
         }
 
-        function makeContainsNameColours(array) {
-            let containerDiv=document.createElement("div")
-            containerDiv.className="containsNameColours"
-            for (let i = 0; i < array.length; i++) {
-                let div = document.createElement("div");
-                div.className = "colorBox";
-                div.innerHTML = array[i];
-                containerDiv.appendChild(div);
-                containerDiv.style.display="flex"
-                div.style.backgroundColor="grey"
-                div.style.width="70px"
-                div.style.height="70px"
-            }
-            document.body.appendChild(containerDiv)
-        }
-
-
-
+        /*
+            switch (colorBottoms) {
+                case "white":
+                    div.style.backgroundColor = "white";
+                    break;
+                case "green":
+                    div.style.backgroundColor = "green";
+                    break;
+                case "red":
+                    div.style.backgroundColor = "red";
+                    break;
+                case "blue":
+                    div.style.backgroundColor = "blue";
+                    break;
+                case "pink":
+                    div.style.backgroundColor = "pink";
+                    break;
+                case "yellow":
+                    div.style.backgroundColor = "yellow";
+                    break;
+                case "orange":
+                    div.style.backgroundColor = "orange";
+                    break;
+                case "cyan":
+                    div.style.backgroundColor = "cyan";
+                    break;
+            }*/
 
         function init() {
             getRandomMaster()
             getRandomUser()
-            makeContainsNameColours(masterArray)
+            makeColoursArray(colorsArray)
+            makeMasterArray(masterArray)
+            makeUserArray(userArray)
             coincidencia = compareTwoArrays()
         }
     </script>
