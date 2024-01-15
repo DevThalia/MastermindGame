@@ -15,7 +15,6 @@
         let masterArray = [];
         let userArray = [];
         let match = false;
-        let matchArray=[];
         let coincidencia;
         let sameColour;
 
@@ -118,24 +117,28 @@
         }
 
         // Función que compara los dos arrays
-            function compareTwoArrays() {
-                for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
-                    if (masterArray[i] === userArray[i]) {
-                        console.log("Coincidencia en posición y color");
-                    } else {
-                        console.log("No hay coincidencia en posición y color");
-                    }
+        function compareTwoArrays() {
+            for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
+                if (masterArray[i] === userArray[i]) {
+                    console.log("Coincidencia en posición y color");
+                    console.log("Color: " + masterArray[i] + " posición: " + masterArray.indexOf(masterArray[i]))
+                } else {
+                    console.log("No hay coincidencia en posición y color");
                 }
             }
+        }
 
         //function that creates an array that conains the math colours
         function createMatchArray() {
-                let matchArray = [];
-                for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
-                    matchArray.push(masterArray[i]);
+            let matchArray = [];
+            for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
+                let element = matchArray[i];
+                if (userArray.includes(element)) {
+                    matchArray.push(element);
                 }
-                console.log("Array de coincidencias: " + matchArray);
             }
+            console.log("Array de coincidencias: " + matchArray);
+        }
 
         function init() {
             getRandomMaster()
