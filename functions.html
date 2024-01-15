@@ -14,6 +14,8 @@
         const MAX_COMBINATION_COLORS = 4;
         const masterArray = [];
         const userArray = [];
+        const resultArray=[];
+        const colorsResultArray=['white','grey','black'];
 
 
         //function that make a random Array whit random colours
@@ -50,7 +52,6 @@
             document.body.appendChild(containerDiv)
         }
 
-
         //function that displays the user array on the navegator screen
         function makeUserArray(userArray) {
             let contaninerUser = document.createElement("div")
@@ -69,10 +70,9 @@
             }
             document.body.appendChild(contaninerUser)
         }
-        
-        
+         
         //function that displays the colours array on the navegator screen
-        function makeColoursArray(colorsArray) {
+        function makeColoursArray(colorsResultArray) {
             let containerDiv = document.createElement("div");
             containerDiv.className = "containsColoursArray";
             containerDiv.style.display = "flex";
@@ -83,7 +83,7 @@
                 div.innerHTML = colorsArray[i];
                 div.style.width = "70px";
                 div.style.height = "70px";
-                div.style.backgroundColor = colorsArray[i];
+                div.style.backgroundColor = colorsResultArray[i];
                 div.style.margin="10px";
 
                 containerDiv.appendChild(div);
@@ -98,11 +98,12 @@
                 if (masterArray[i] === userArray[i]) {
                     console.log("Coincidencia en posición y color");
                     console.log("Color: " + masterArray[i] + " posición: " + masterArray.indexOf(masterArray[i]))
-                    createMatchArray()
+                    
                 } else {
                     console.log("No hay coincidencia en posición y color");
                 }
             }
+            createMatchArray()
         }
 
         //function that creates an array that contains the math colours
@@ -126,7 +127,6 @@
             makeMasterArray(masterArray)
             makeUserArray(userArray)
             compareTwoArrays()
-            //createMatchArray()
         }
     </script>
 </body>
