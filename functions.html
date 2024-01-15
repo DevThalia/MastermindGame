@@ -15,6 +15,9 @@
         let masterArray = [];
         let userArray = [];
         let match = false;
+        let matchArray=[];
+        let coincidencia;
+        let sameColour;
 
         //function that make a random Array whit random colours
         function getRandomMaster() {
@@ -49,6 +52,8 @@
             document.body.appendChild(containerDiv)
         }
 
+
+        //function that displays the user array on the navegator screen
         function makeUserArray(userArray) {
             let contaninerUser = document.createElement("div")
             contaninerUser.className = "containsUserArray"
@@ -94,7 +99,7 @@
                     break;
             }*/
 
-        //function that displays the user array on the navegator screen
+        //function that displays the colours array on the navegator screen
         function makeColoursArray(colorsArray) {
             let containerDiv = document.createElement("div");
             containerDiv.className = "containsColoursArray";
@@ -112,50 +117,25 @@
             document.body.appendChild(containerDiv);
         }
 
-        //function that compare the masterArray and userArray. Also it print on console.log the results of the comparacion
-        function compareTwoArrays() {
-            for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
-                if (masterArray[i] == userArray[i]) {
-                    let coincidencia = masterArray[i]
-                    match = true
-                    console.log("Boolean -> " + match)
-                    console.log("Color que coincide -> " + coincidencia)
-                    console.log("Índex de coincidencia -> " + masterArray.indexOf(coincidencia))
-                } else {
-                    match = false
-                    console.log(match)
-                    console.log(masterArray[i])
+        // Función que compara los dos arrays
+            function compareTwoArrays() {
+                for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
+                    if (masterArray[i] === userArray[i]) {
+                        console.log("Coincidencia en posición y color");
+                    } else {
+                        console.log("No hay coincidencia en posición y color");
+                    }
                 }
             }
-        }
 
-        /*
-            switch (colorBottoms) {
-                case "white":
-                    div.style.backgroundColor = "white";
-                    break;
-                case "green":
-                    div.style.backgroundColor = "green";
-                    break;
-                case "red":
-                    div.style.backgroundColor = "red";
-                    break;
-                case "blue":
-                    div.style.backgroundColor = "blue";
-                    break;
-                case "pink":
-                    div.style.backgroundColor = "pink";
-                    break;
-                case "yellow":
-                    div.style.backgroundColor = "yellow";
-                    break;
-                case "orange":
-                    div.style.backgroundColor = "orange";
-                    break;
-                case "cyan":
-                    div.style.backgroundColor = "cyan";
-                    break;
-            }*/
+        //function that creates an array that conains the math colours
+        function createMatchArray() {
+                let matchArray = [];
+                for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
+                    matchArray.push(masterArray[i]);
+                }
+                console.log("Array de coincidencias: " + matchArray);
+            }
 
         function init() {
             getRandomMaster()
@@ -163,7 +143,8 @@
             makeColoursArray(colorsArray)
             makeMasterArray(masterArray)
             makeUserArray(userArray)
-            coincidencia = compareTwoArrays()
+            compareTwoArrays()
+            createMatchArray()
         }
     </script>
 </body>
