@@ -12,11 +12,9 @@
         const colorsArray = ['white', 'green', 'red', 'blue', 'pink', 'yellow', 'orange', 'cyan']
         const MAX_ATTEMPS = 10;
         const MAX_COMBINATION_COLORS = 4;
-        let masterArray = [];
-        let userArray = [];
-        let match = false;
-        let coincidencia;
-        let sameColour;
+        const masterArray = [];
+        const userArray = [];
+
 
         //function that make a random Array whit random colours
         function getRandomMaster() {
@@ -44,9 +42,10 @@
                 div.innerHTML = masterArray[i];
                 containerDiv.appendChild(div);
                 containerDiv.style.display = "flex"
-                div.style.backgroundColor = "lightblue"
+                div.style.backgroundColor = masterArray[i]
                 div.style.width = "70px"
                 div.style.height = "70px"
+                div.style.margin="10px";
             }
             document.body.appendChild(containerDiv)
         }
@@ -62,42 +61,16 @@
                 div.innerHTML = userArray[i];
                 contaninerUser.appendChild(div);
                 contaninerUser.style.display = "flex"
-                div.style.backgroundColor = "lightgreen"
-                div.style.width = "70px"
-                div.style.height = "70px"
+                div.style.backgroundColor = userArray[i];
+                div.style.width = "70px";
+                div.style.height = "70px";
+                div.style.margin="10px";
                 //printDifferentColours(userArray)
             }
             document.body.appendChild(contaninerUser)
         }
-
-        /*printDifferentColours(userArray) 
-            switch (userArray[i]) {
-                case "white":
-                    div.style.backgroundColor = "white";
-                    break;
-                case "green":
-                    div.style.backgroundColor = "green";
-                    break;
-                case "red":
-                    div.style.backgroundColor = "red";
-                    break;
-                case "blue":
-                    div.style.backgroundColor = "blue";
-                    break;
-                case "pink":
-                    div.style.backgroundColor = "pink";
-                    break;
-                case "yellow":
-                    div.style.backgroundColor = "yellow";
-                    break;
-                case "orange":
-                    div.style.backgroundColor = "orange";
-                    break;
-                case "cyan":
-                    div.style.backgroundColor = "cyan";
-                    break;
-            }*/
-
+        
+        
         //function that displays the colours array on the navegator screen
         function makeColoursArray(colorsArray) {
             let containerDiv = document.createElement("div");
@@ -110,6 +83,8 @@
                 div.innerHTML = colorsArray[i];
                 div.style.width = "70px";
                 div.style.height = "70px";
+                div.style.backgroundColor = colorsArray[i];
+                div.style.margin="10px";
 
                 containerDiv.appendChild(div);
             }
@@ -119,24 +94,28 @@
         // Función que compara los dos arrays
         function compareTwoArrays() {
             for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
+                let matches;
                 if (masterArray[i] === userArray[i]) {
                     console.log("Coincidencia en posición y color");
                     console.log("Color: " + masterArray[i] + " posición: " + masterArray.indexOf(masterArray[i]))
+                    createMatchArray()
                 } else {
                     console.log("No hay coincidencia en posición y color");
                 }
             }
         }
 
-        //function that creates an array that conains the math colours
+        //function that creates an array that contains the math colours
         function createMatchArray() {
+            let matches;
             let matchArray = [];
             for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
-                let element = matchArray[i];
-                if (userArray.includes(element)) {
+                let element = userArray[i];
+                if (masterArray.includes(element)) {
                     matchArray.push(element);
                 }
             }
+
             console.log("Array de coincidencias: " + matchArray);
         }
 
@@ -147,7 +126,7 @@
             makeMasterArray(masterArray)
             makeUserArray(userArray)
             compareTwoArrays()
-            createMatchArray()
+            //createMatchArray()
         }
     </script>
 </body>
