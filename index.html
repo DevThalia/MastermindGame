@@ -4,18 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mastermind</title>
+    <title>Index mastermind</title>
 </head>
 
 <body onload="init()">
     <script>
+
         const colorsArray = ['white', 'green', 'red', 'blue', 'pink', 'yellow', 'orange', 'cyan']
-        const MAX_ATTEMPS = 10;
-        const MAX_COMBINATION_COLORS = 4;
         const masterArray = [];
         const userArray = [];
-        const resultArray=[];
-        const colorsResultArray=['white','grey','black'];
+        const matchArray = []
+        const resultArray = ['white', 'grey', 'black'];
+        const MAX_ATTEMPS = 10;
+        const MAX_COMBINATION_COLORS = 4;
+        var coincide = Boolean;
+        var colorsResultArray = [];
 
 
         //function that make a random Array whit random colours
@@ -47,7 +50,7 @@
                 div.style.backgroundColor = masterArray[i]
                 div.style.width = "70px"
                 div.style.height = "70px"
-                div.style.margin="10px";
+                div.style.margin = "10px";
             }
             document.body.appendChild(containerDiv)
         }
@@ -65,14 +68,14 @@
                 div.style.backgroundColor = userArray[i];
                 div.style.width = "70px";
                 div.style.height = "70px";
-                div.style.margin="10px";
+                div.style.margin = "10px";
                 //printDifferentColours(userArray)
             }
             document.body.appendChild(contaninerUser)
         }
-         
+
         //function that displays the colours array on the navegator screen
-        function makeColoursArray(colorsResultArray) {
+        function makeColoursArray(colorsArray) {
             let containerDiv = document.createElement("div");
             containerDiv.className = "containsColoursArray";
             containerDiv.style.display = "flex";
@@ -83,42 +86,60 @@
                 div.innerHTML = colorsArray[i];
                 div.style.width = "70px";
                 div.style.height = "70px";
-                div.style.backgroundColor = colorsResultArray[i];
-                div.style.margin="10px";
+                div.style.backgroundColor = colorsArray[i];
+                div.style.margin = "10px";
 
                 containerDiv.appendChild(div);
             }
             document.body.appendChild(containerDiv);
         }
 
-        // Función que compara los dos arrays
-        function compareTwoArrays() {
-            for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
-                let matches;
-                if (masterArray[i] === userArray[i]) {
-                    console.log("Coincidencia en posición y color");
-                    console.log("Color: " + masterArray[i] + " posición: " + masterArray.indexOf(masterArray[i]))
-                    
-                } else {
-                    console.log("No hay coincidencia en posición y color");
+        //funcion que compara user array y master array
+        function compareTwoArrays(userArray, masterArray) {
+            console.log("entra en compare")
+            for (let i = 0; i < masterArray.length; i++) {
+                for (let j = 0; i < userArray.length; i++) {
+                    //hay coincidencia
+                    if (masterArray[i].includes(userArray[j])) {
+                        coincide = true;
+                        colorsResultArray = "white";
+                        matchArray.push(colorsResultArray);
+                        console.log(colorsResultArray);
+                        if (masterArray[i] == userArray[j]) {
+                            colorsResultArray = "black"
+                            console.log(colorsResultArray);
+                            matchArray.push(colorsResultArray);
+                        }
+                    } else { //no hay coincidencia
+                        coincide = false;
+                        colorsResultArray = "grey";
+                        console.log(colorsResultArray);
+                        matchArray.push(colorsResultArray);
+                    }
                 }
             }
-            createMatchArray()
+            makeResultArray(matchArray, coincide);
         }
 
-        //function that creates an array that contains the math colours
-        function createMatchArray() {
-            let matches;
-            let matchArray = [];
+        function makeResultArray(matchArray, coincide) {
+            let contaninerResult = document.createElement("div");
+            contaninerResult.className = "containResultArray";
+            contaninerResult.style.backgroundColor = "Violet"
             for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
-                let element = userArray[i];
-                if (masterArray.includes(element)) {
-                    matchArray.push(element);
-                }
+                let div = document.createElement("div");
+                div.className = "resultBoxes";
+                div.innerHTML = matchArray[i];
+                contaninerResult.appendChild(div);
+                contaninerResult.style.display = "flex"
+                div.style.backgroundColor = matchArray[i];
+                div.style.width = "70px";
+                div.style.height = "70px";
+                div.style.margin = "10px";
+                //printDifferentColours(userArray)
             }
-
-            console.log("Array de coincidencias: " + matchArray);
+            document.body.appendChild(contaninerResult)
         }
+
 
         function init() {
             getRandomMaster()
@@ -126,9 +147,32 @@
             makeColoursArray(colorsArray)
             makeMasterArray(masterArray)
             makeUserArray(userArray)
-            compareTwoArrays()
+            compareTwoArrays(userArray, masterArray)
         }
+
     </script>
+    <h1>Mastermind</h1>
+    <article class="containsFirstPartOfGame">
+        <div class="containsMasterArray">MASTER ARRAY</div>
+        <div class="containsColoursArray">
+            <h2>Pulsa la combinación de 4 colores</h2>
+            ARRAY DE COLORES
+            <input disabled class="userSelection" type="text">
+            <button class="checkButtom" onclick="compareTwoArrays()">Comprobar</button>
+        </div>
+    </article>
+    <article class="checkGame">
+        <div>
+            <p class="mensajeIntentos">Primer Intento Suerte!</p>
+            <div class="containsResults">
+                <div class="options"></div>
+                Contiene array de colores del usuario
+                <div class="resuts"></div>
+                Contiene array con colores black white y grey
+            </div>
+        </div>
+    </article>
+    <div class="containsUserTryes"></div>
 </body>
 
 </html>
