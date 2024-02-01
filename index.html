@@ -1,201 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index mastermind</title>
-    <style>
-        /* Agrega estilos CSS según sea necesario */
-        .containsMasterArrayHidden {
-            background-color: grey;
-        }
-    </style>
+    <title>Índice Mastermind</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="init()">
-    <script>
-        const colorsArray = ['white', 'green', 'red', 'blue', 'pink', 'yellow', 'orange', 'cyan'];
-        const masterArray = [];
-        const userArray = [];
-        const colorsResultArray = [];
-        const MAX_ATTEMPTS = 10;
-        const MAX_COMBINATION_COLORS = 4;
-        let attempts = 0;
+    </head>
 
-        function getRandomMaster() {
-            for (let i = 1; i <= MAX_COMBINATION_COLORS; i++) {
-                masterArray.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
+    <body onload="init()">
+        <script>
+            const arrayColores = ['white', 'green', 'red', 'blue', 'pink', 'yellow', 'orange', 'brown'];
+            const arrayMaster = [];
+            const arrayUsuario = [];
+            const arrayResultadosColores = [];
+            const MAX_INTENTOS = 3;
+            const MAX_COMBINACION_COLORES = 4;
+            let intentos = 0;
+
+            function obtenerMasterAleatorio() {
+                for (let i = 1; i <= MAX_COMBINACION_COLORES; i++) {
+                    arrayMaster.push(arrayColores[Math.floor(Math.random() * arrayColores.length)]);
+                }
+                console.log("ARRAY DE LA MASTER: " + arrayMaster);
             }
-            console.log("ARRAY DE LA MASTER: " + masterArray);
-        }
 
-        function getRandomUser() {
-            userArray.length = 0; // Reinicia el array del usuario
-            for (let i = 1; i <= MAX_COMBINATION_COLORS; i++) {
-                userArray.push(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
+            function obtenerUsuario() {
+                arrayUsuario.length = 0;
+                actualizarArrayUsuario(arrayUsuario);
             }
-            console.log("ARRAY DEL USUARIO: " + userArray);
-            updateCurrentUserArray(userArray);
-        }
 
-        function makeMasterArray(masterArray) {
-            let containerDiv = document.createElement("div");
-            containerDiv.className = "containsMasterArrayHidden"; // Inicialmente oculto
-            for (let i = 0; i < masterArray.length; i++) {
-                let div = document.createElement("div");
-                div.className = "masterBoxes";
-                div.innerHTML = masterArray[i];
-                containerDiv.appendChild(div);
-                containerDiv.style.display = "flex";
-                div.style.backgroundColor = "grey"; // Color gris inicial
-                div.style.width = "70px";
-                div.style.height = "70px";
-                div.style.margin = "10px";
+            function crearArrayMaster(arrayMaster) {
+                let contenedorDiv = document.createElement("div");
+                contenedorDiv.className = "contieneArrayMasterOculto"; // Inicialmente oculto
+                for (let i = 0; i < arrayMaster.length; i++) {
+                    let div = document.createElement("div");
+                    div.className = "cajasMaster";
+                    div.innerHTML = arrayMaster[i];
+                    contenedorDiv.appendChild(div);
+                }
+                document.body.appendChild(contenedorDiv);
             }
-            document.body.appendChild(containerDiv);
-        }
 
-        function makeVisibleMasterArray() {
-            let hiddenMasterArray = document.querySelector(".containsMasterArrayHidden");
-            if (hiddenMasterArray) {
-                hiddenMasterArray.style.backgroundColor = "transparent"; // Mostrar el array de la master
-            }
-        }
-
-        function makeUserArray(userArray) {
-            let containerUser = document.createElement("div");
-            containerUser.className = "containsUserArray";
-            for (let i = 0; i < userArray.length; i++) {
-                let div = document.createElement("div");
-                div.className = "userBoxes";
-                div.innerHTML = userArray[i];
-                containerUser.appendChild(div);
-                containerUser.style.display = "flex";
-                div.style.backgroundColor = userArray[i];
-                div.style.width = "70px";
-                div.style.height = "70px";
-                div.style.margin = "10px";
-            }
-            document.body.appendChild(containerUser);
-        }
-
-        function makeColoursArray(colorsArray) {
-            let containerDiv = document.createElement("div");
-            containerDiv.className = "containsColoursArray";
-            containerDiv.style.display = "flex";
-
-            for (let i = 0; i < colorsArray.length; i++) {
-                let div = document.createElement("div");
-                div.className = "colorBottoms";
-                div.innerHTML = colorsArray[i];
-                div.style.width = "70px";
-                div.style.height = "70px";
-                div.style.backgroundColor = colorsArray[i];
-                div.style.margin = "10px";
-
-                div.onclick = function () {
-                    addUserColor(colorsArray[i]);
-                };
-
-                containerDiv.appendChild(div);
-            }
-            document.body.appendChild(containerDiv);
-        }
-
-        function addUserColor(color) {
-            if (userArray.length < MAX_COMBINATION_COLORS) {
-                userArray.push(color);
-                updateCurrentUserArray(userArray);
-            }
-        }
-
-        function updateCurrentUserArray(userArray) {
-            let existingUserContainer = document.querySelector(".containsUserArray");
-            if (existingUserContainer) {
-                document.body.removeChild(existingUserContainer);
-            }
-            makeUserArray(userArray);
-        }
-
-        function compareTwoArrays() {
-            colorsResultArray.length = 0; // Reinicia el array de resultados
-            console.log("entra en compare");
-
-            let allColorsMatch = true;
-
-            for (let i = 0; i < masterArray.length; i++) {
-                if (masterArray[i] === userArray[i]) {
-                    colorsResultArray.push("black");
-                } else if (userArray.includes(masterArray[i])) {
-                    colorsResultArray.push("grey");
-                    allColorsMatch = false;
-                } else {
-                    colorsResultArray.push("white");
-                    allColorsMatch = false;
+            function hacerVisibleArrayMaster(arrayMaster) {
+                let arrayMasterOculto = document.querySelector(".contieneArrayMasterOculto");
+                for (let i = 0; i < MAX_COMBINACION_COLORES; i++) {
+                    if (arrayMasterOculto) {
+                        arrayMasterOculto.style.backgroundColor = arrayMaster[i];
+                    }
                 }
             }
 
-            if (allColorsMatch) {
-                colorsResultArray.fill("black");
+            function crearArrayUsuario(arrayUsuario) {
+                let contenedorUsuario = document.createElement("div");
+                contenedorUsuario.className = "contieneArrayUsuario";
+                for (let i = 0; i < arrayUsuario.length; i++) {
+                    let div = document.createElement("div");
+                    div.className = "cajasUsuario";
+                    div.innerHTML = arrayUsuario[i];
+                    div.style.backgroundColor = arrayUsuario[i];
+                    contenedorUsuario.appendChild(div);
+                }
+                document.body.appendChild(contenedorUsuario);
             }
 
-            makeResultArray(colorsResultArray);
+            function crearArrayColores(arrayColores) {
+                let contenedorDiv = document.createElement("div");
+                contenedorDiv.className = "contieneArrayColores";
+                for (let i = 0; i < arrayColores.length; i++) {
+                    let div = document.createElement("div");
+                    div.className = "coloresInferiores";
+                    div.innerHTML = arrayColores[i];
+                    div.style.backgroundColor = arrayColores[i];
 
-            attempts++;
-            document.getElementById("attemptsCounter").innerText = attempts;
+                    div.onclick = function () {
+                        agregarColorUsuario(arrayColores[i]);
+                    };
 
-            if (attempts >= MAX_ATTEMPTS) {
-                makeVisibleMasterArray();
+                    contenedorDiv.appendChild(div);
+                }
+                document.body.appendChild(contenedorDiv);
             }
-        }
 
-        function makeResultArray(colorsResultArray) {
-            let containerResult = document.createElement("div");
-            containerResult.className = "containsResultArray";
-            containerResult.style.backgroundColor = "Violet";
-            for (let i = 0; i < MAX_COMBINATION_COLORS; i++) {
-                let div = document.createElement("div");
-                div.className = "resultBoxes";
-                div.innerHTML = colorsResultArray[i];
-                containerResult.appendChild(div);
-                containerResult.style.display = "flex";
-                div.style.backgroundColor = colorsResultArray[i];
-                div.style.width = "70px";
-                div.style.height = "70px";
-                div.style.margin = "10px";
+            function agregarColorUsuario(color) {
+                if (arrayUsuario.length < MAX_COMBINACION_COLORES) {
+                    arrayUsuario.push(color);
+                    actualizarArrayUsuario(arrayUsuario);
+                }
             }
-            document.body.appendChild(containerResult);
-        }
 
-        function init() {
-            getRandomMaster();
-            makeMasterArray(masterArray);
-            makeColoursArray(colorsArray);
-        }
-    </script>
-    <h1>Mastermind</h1>
-    <article class="containsFirstPartOfGame">
-        <div class="containsMasterArray">MASTER ARRAY</div>
-        <div class="containsColoursArray">
-            <h2>Pulsa la combinación de 4 colores</h2>
-            ARRAY DE COLORES
-            <button class="checkButton" onclick="compareTwoArrays()">Comprobar</button>
-            <button class="generateUserArrayButton" onclick="getRandomUser()">Generar Combinación Usuario</button>
-        </div>
-    </article>
-    <article class="checkGame">
-        <div>
-            <p class="mensajeIntentos">Intentos realizados: <span id="attemptsCounter">0</span></p>
-            <div class="containsResults">
-                <div class="options"></div>
-                Contiene array de colores del usuario
-                <div class="results"></div>
-                Contiene array con colores black white y grey
+            function actualizarArrayUsuario(arrayUsuario) {
+                let contenedorUsuarioExistente = document.querySelector(".contieneArrayUsuario");
+                if (contenedorUsuarioExistente) {
+                    document.body.removeChild(contenedorUsuarioExistente);
+                }
+                crearArrayUsuario(arrayUsuario);
+            }
+
+            function compararDosArrays() {
+                arrayResultadosColores.length = 0;
+                let todosColoresCoinciden = true;
+
+                for (let i = 0; i < arrayMaster.length; i++) {
+                    if (arrayMaster[i] === arrayUsuario[i]) {
+                        arrayResultadosColores.push("black");
+                    } else if (arrayUsuario.includes(arrayMaster[i])) {
+                        arrayResultadosColores.push("grey");
+                        todosColoresCoinciden = false;
+                    } else {
+                        arrayResultadosColores.push("white");
+                        todosColoresCoinciden = false;
+                    }
+                }
+
+                if (todosColoresCoinciden) {
+                    arrayResultadosColores.fill("black");
+                }
+
+                crearArrayResultados(arrayResultadosColores);
+
+                intentos++;
+                document.getElementById("contadorIntentos").innerText = intentos;
+
+                if (intentos >= MAX_INTENTOS) {
+                    hacerVisibleArrayMaster();
+                }
+                obtenerUsuario();
+            }
+
+            function crearArrayResultados(arrayResultadosColores) {
+                let contenedorResultados = document.createElement("div");
+                contenedorResultados.className = "contieneArrayResultados";
+                for (let i = 0; i < MAX_COMBINACION_COLORES; i++) {
+                    let div = document.createElement("div");
+                    div.className = "cajasResultados";
+                    div.innerHTML = arrayResultadosColores[i];
+                    div.style.backgroundColor = arrayResultadosColores[i];
+                    contenedorResultados.appendChild(div);
+                }
+                document.body.appendChild(contenedorResultados);
+            }
+
+            function init() {
+                obtenerMasterAleatorio();
+                crearArrayMaster(arrayMaster);
+                crearArrayColores(arrayColores);
+            }
+        </script>
+        <h1>Mastermind</h1>
+        <article class="contienePrimeraParteDelJuego">
+            <div class="contieneArrayMaster"></div>
+            <div class="contieneArrayColores">
+                <h2>Pulsa la combinación de 4 colores</h2>
+                <button class="botonComprobar" onclick="compararDosArrays()">Comprobar</button>
             </div>
-        </div>
-    </article>
-    <div class="containsUserTries"></div>
-</body>
+        </article>
+        <article class="verificarJuego">
+            <div>
+                <p class="mensajeIntentos">Intentos realizados: <span id="contadorIntentos">0</span></p>
+                <div class="contieneResultados">
+                    <div class="opciones"></div>
+                    <div class="resultados"></div>
+                </div>
+            </div>
+        </article>
+        <div class="contieneIntentosUsuario"></div>
+    </body>
 
 </html>

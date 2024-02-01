@@ -1,0 +1,69 @@
+h1 {
+    text-transform: uppercase;
+}
+
+.contieneArrayMasterOculto {
+    background-color: grey;
+    display: flex;
+}
+
+.cajasMaster {
+    background-color: grey;
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contieneArrayUsuario {
+    display: flex;
+}
+
+.cajasUsuario {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contieneArrayColores {
+    display: flex;
+}
+
+.coloresInferiores {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.contieneArrayResultados {
+    background-color: violet;
+    display: flex;
+}
+
+.cajasResultados {
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contienePrimeraParteDelJuego,
+.verificarJuego {
+    display: flex;
+}
+
+.botonComprobar {
+    cursor: pointer;
+    
+}
