@@ -1,69 +1,157 @@
-h1 {
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+}
+
+p {
+    padding: 10px;
     text-transform: uppercase;
+    background-color: #6a0572;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #6a0572;
+}
+
+.contenedor-principal {
+    width: 70%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
 }
 
 .contieneArrayMasterOculto {
-    background-color: grey;
+    display: flex;
+    background-color: #a3a3a3;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 10px;
+    flex-direction: row;
+}
+
+.contieneArrayMaster {
     display: flex;
 }
 
 .cajasMaster {
-    background-color: grey;
-    width: 70px;
-    height: 70px;
-    margin: 10px;
-    display: flex;
+    background-color: #a3a3a3;
+    width: 50px;
+    height: 50px;
+    margin: 5px;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
+    color: transparent;
 }
 
 .contieneArrayUsuario {
     display: flex;
+    margin-top: 20px;
+    justify-content: center;
 }
 
 .cajasUsuario {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
+    border: 0.5px solid #ccc;
+    background-color: #e0e0e0;
+}
+
+.coloresInferiores {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    border-color: #e0e0e0;
+    border-width: 5px;
+    border-style: solid;
 }
 
 .contieneArrayColores {
     display: flex;
-}
-
-.coloresInferiores {
-    width: 70px;
-    height: 70px;
-    margin: 10px;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.contieneArrayResultados {
-    background-color: violet;
-    display: flex;
-}
-
-.cajasResultados {
-    width: 70px;
-    height: 70px;
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .contienePrimeraParteDelJuego,
 .verificarJuego {
     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .botonComprobar {
     cursor: pointer;
-    
+    width: 100%;
+    background-color: #6a0572;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#tablero {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.respuestaIntento {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.usuarioRespuesta,
+.resultadosRespuesta {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.colorCaja {
+    display: flex;
+    flex-direction: row;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.botonJugarDeNuevo {
+    cursor: pointer;
+    width: 100%;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 10px;
+    font-weight: bold;
 }
